@@ -1,0 +1,33 @@
+package T3;
+import java.util.ArrayList;
+
+public class ContactBook<T extends Contact> {
+    private final ArrayList<T> contacts = new ArrayList<>();
+    public void addContact(T contact) {
+        contacts.add(contact);
+    }
+    public void printList() {
+        for (T contact : contacts) {
+            System.out.println("Имя: " + contact.getName());
+            contact.print();
+        }
+    }
+    public void congratulate(String name) {
+        boolean contactPresented = false;
+        T contact = null;
+        for (T c : contacts) {
+            if (c.getName().equals(name)) {
+                contact = c;
+                contactPresented = true;
+                break;
+            }
+        }
+        System.out.println("Поздравим с Новым годом ваш контакт из записной книжки: " + name);
+
+        if (contactPresented) {
+            contact.sendMessage();
+        } else {
+            System.out.println("Не найден контакт с указанным именем.");
+        }
+    }
+}
